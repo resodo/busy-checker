@@ -73,7 +73,7 @@ jobs:
       - name: Install Poetry
         run: |
           curl -sSL https://install.python-poetry.org | python3 -
-          export PATH="/Users/runner/.local/bin:$PATH"
+          echo "::add-path::$HOME/.local/bin"
       - name: Install project
         run: make install
       - name: Run tests
