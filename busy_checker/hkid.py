@@ -3,7 +3,7 @@ import datetime
 import requests
 
 # Define your preferred date range and office IDs
-start_date = datetime.date(2023, 7, 1)
+start_date = datetime.date(2023, 7, 10)
 end_date = datetime.date(2023, 7, 31)
 office_ids = ["RHK", "RKO", "RKT"]  # Add your office IDs here
 
