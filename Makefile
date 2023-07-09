@@ -61,6 +61,7 @@ clean:            ## Clean unused files.
 .PHONY: virtualenv
 virtualenv:       ## Create a virtual environment.
 	@poetry install
+	@poetry shell
 
 .PHONY: release
 release:          ## Create a new tag for release.
