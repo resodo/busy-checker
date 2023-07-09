@@ -73,7 +73,7 @@ jobs:
       - name: Install Poetry
         run: |
           curl -sSL https://install.python-poetry.org | python3 -
-          echo "::add-path::$HOME/.local/bin"
+          echo "PATH=$HOME/.local/bin:$PATH" >> $GITHUB_ENV
       - name: Install project
         run: make install
       - name: Run tests
