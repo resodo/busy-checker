@@ -27,16 +27,16 @@ fmt:              ## Format code using black & isort.
 
 .PHONY: lint
 lint:             ## Run pep8, black, mypy linters.
-	$(ENV_PREFIX)flake8 busy_checker/
-	$(ENV_PREFIX)black -l 79 --check busy_checker/
-	$(ENV_PREFIX)black -l 79 --check tests/
-	$(ENV_PREFIX)mypy --ignore-missing-imports busy_checker/
+	$(ENV_PREFIX)poetry run flake8 busy_checker/
+	$(ENV_PREFIX)poetry run black -l 79 --check busy_checker/
+	$(ENV_PREFIX)poetry run black -l 79 --check tests/
+	$(ENV_PREFIX)poetry run mypy --ignore-missing-imports busy_checker/
 
 .PHONY: test
 test: lint        ## Run tests and generate coverage report.
-	$(ENV_PREFIX)pytest -v --cov-config .coveragerc --cov=busy_checker -l --tb=short --maxfail=1 tests/
-	$(ENV_PREFIX)coverage xml
-	$(ENV_PREFIX)coverage html
+	$(ENV_PREFIX)poetry run pytest -v --cov-config .coveragerc --cov=busy_checker -l --tb=short --maxfail=1 tests/
+	$(ENV_PREFIX)poetry run coverage xml
+	$(ENV_PREFIX)poetry run coverage html
 
 .PHONY: watch
 watch:            ## Run tests on every change.
@@ -61,7 +61,6 @@ clean:            ## Clean unused files.
 .PHONY: virtualenv
 virtualenv:       ## Create a virtual environment.
 	@poetry install
-	@poetry shell
 
 .PHONY: release
 release:          ## Create a new tag for release.

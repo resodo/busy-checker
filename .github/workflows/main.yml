@@ -28,8 +28,6 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Install Poetry
         run: curl -sSL https://install.python-poetry.org | python3 -
-      - name: Enable virtualenv
-        run: make virtualenv
       - name: Install project
         run: make install
       - name: Run linter
@@ -50,8 +48,6 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Install project
         run: make install
-      - name: Enable virtualenv
-        run: make virtualenv
       - name: Run tests
         run: make test
       - name: "Upload coverage to Codecov"
@@ -74,7 +70,5 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Install project
         run: make install
-      - name: Enable virtualenv
-        run: make virtualenv
       - name: Run tests
         run: make test
