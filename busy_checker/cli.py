@@ -13,26 +13,32 @@ async def check_hkid_availability_loop():
     await send_message("Start a new round.\n")
 
     time_passed = 0
+    last_slots = None
 
     while True:
         try:
             time_now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             available_slots = busy_checker.hkid.check_availability()
 
-            if available_slots:
-                message = "Available slots found:\n"
-                for slot in available_slots:
-                    message += (
-                        f"Date: {slot['date']},"
-                        + "Office ID: {slot['officeId']},"
-                        + " Regular Quota: {slot['quotaR']},"
-                        + " Extension Quota: {slot['quotaK']}\n"
-                    )
-                message = f"[{time_now}] {message}"
+            if available_slots != last_slots:
+                if available_slots:
+                    message = "Available slots found:\n"
+                    for slot in available_slots:
+                        message += (
+                            f"Date: {slot['date']},"
+                            + f"Office ID: {slot['officeId']},"
+                            + f" Regular Quota: {slot['quotaR']},"
+                            + f" Extension Quota: {slot['quotaK']}\n"
+                        )
+                    message = f"[{time_now}] {message}"
+                else:
+                    message = f"[{time_now}] No available slots at the moment."
+                
                 print(message)
                 await send_message(message)
+                last_slots = available_slots
             else:
-                print(f"[{time_now}] No available slots at the moment.")
+                print(f"[{time_now}] Same results at the moment.")
 
             time_passed += TIME_INTERVAL
             if time_passed >= HEART_BEAT_INTERVAL:
