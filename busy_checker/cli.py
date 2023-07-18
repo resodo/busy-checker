@@ -33,7 +33,6 @@ async def check_hkid_availability_loop():
                     message = f"[{time_now}] {message}"
                 else:
                     message = f"[{time_now}] No available slots at the moment."
-                
                 print(message)
                 await send_message(message)
                 last_slots = available_slots
