@@ -22,7 +22,10 @@ async def check_hkid_availability_loop():
 
             if available_slots != last_slots:
                 if available_slots:
-                    message = "Available slots found:\n"
+                    message = (
+                        "Available slots in near "
+                        + f"{busy_checker.hkid.days} days found:\n"
+                    )
                     for slot in available_slots:
                         message += (
                             f"Date: {slot['date']},"
@@ -32,12 +35,18 @@ async def check_hkid_availability_loop():
                         )
                     message = f"[{time_now}] {message}"
                 else:
-                    message = f"[{time_now}] No available slots at the moment."
+                    message = (
+                        f"[{time_now}] No available slots in near "
+                        + f"{busy_checker.hkid.days} days."
+                    )
                 print(message)
                 await send_message(message)
                 last_slots = available_slots
             else:
-                print(f"[{time_now}] Same results at the moment.")
+                print(
+                    f"[{time_now}] Same results in near "
+                    + f"{busy_checker.hkid.days} days."
+                )
 
             time_passed += TIME_INTERVAL
             if time_passed >= HEART_BEAT_INTERVAL:
